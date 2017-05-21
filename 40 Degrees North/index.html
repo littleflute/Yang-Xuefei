@@ -1,0 +1,61 @@
+<!DOCTYPE html>  
+<html>	
+<head>	
+<title>	
+</title>	
+</head>	
+<body>	
+para 1:  <br>	
+<a href="http://www.beautifullover.org" target="_blank">	
+beautifullover </a>	
+</br>	
+<a href="https://github.com/littleflute/BlCDs/issues/519" target="_blank">	
+issue519 </a>	
+<div id="curSong" style="border:1px solid green;"></div>	
+<p id="demo" style="border:1px solid red;"></p>		
+<button onclick="play('01 Sevilla.mp3')">1:01 Sevilla.mp3</button> 
+<button onclick="play('02 Cordoba.mp3')">2:02 Cordoba.mp3</button> 
+<button onclick="play('03 Castilla.mp3')">3:03 Castilla.mp3</button> 
+<button onclick="play('04 The Chinese Garden--Jasmine Flower.mp3')">4:04 The Chinese Garden--Jasmine Flower.mp3</button> 
+<button onclick="play('05 Red Flowers Blooming All Over The Mountain.mp3')">5:05 Red Flowers Blooming All Over The Mountain.mp3</button> 
+<button onclick="play('06 Blue Orchid.mp3')">6:06 Blue Orchid.mp3</button> 
+<button onclick="play('07 Variations On the Carnival of Venice.mp3')">7:07 Variations On the Carnival of Venice.mp3</button> 
+<button onclick="play('08 The Butterly Lovers.mp3')">8:08 The Butterly Lovers.mp3</button> 
+<button onclick="play('09 Valses Poeticos.mp3')">9:09 Valses Poeticos.mp3</button> 
+<button onclick="play('10 Valses Poeticos.mp3')">10:10 Valses Poeticos.mp3</button> 
+<br> 
+<button onclick="play('11 Valses Poeticos.mp3')">11:11 Valses Poeticos.mp3</button> 
+<button onclick="play('12 Valses Poeticos.mp3')">12:12 Valses Poeticos.mp3</button> 
+<button onclick="play('13 Valses Poeticos.mp3')">13:13 Valses Poeticos.mp3</button> 
+<button onclick="play('14 Valses Poeticos.mp3')">14:14 Valses Poeticos.mp3</button> 
+<button onclick="play('15 Valses Poeticos.mp3')">15:15 Valses Poeticos.mp3</button> 
+<button onclick="play('16 Valses Poeticos.mp3')">16:16 Valses Poeticos.mp3</button> 
+<button onclick="play('17 Valses Poeticos.mp3')">17:17 Valses Poeticos.mp3</button> 
+<button onclick="play('18 Yi Dance.mp3')">18:18 Yi Dance.mp3</button> 
+<button onclick="play('19 Plum Blossoms In The Snow.mp3')">19:19 Plum Blossoms In The Snow.mp3</button> 
+<button onclick="play('20 A La Mu Han.mp3')">20:20 A La Mu Han.mp3</button> 
+<audio id="mp3Player" controls> 	
+	<source src="01 Owner of a Lonely Heart.mp3" type="audio/mpeg">	
+Your browser does not supoort hte audio element	
+</audio>		
+<script>								
+	var xmlhttp = new XMLHttpRequest();				
+	xmlhttp.onreadystatechange = function() {				
+   	if(this.readyState == 4 && this.status == 200) {		
+       		var myObj = JSON.parse(this.responseText); 		
+       		document.getElementById("demo").innerHTML = myObj.songNum;	
+   	}								
+	};		
+	xmlhttp.open("GET", "https://littleflute.github.io/Elton-John/l.json", true);	
+	xmlhttp.send();							
+//--	
+function play(url){		
+	var p = document.getElementById("mp3Player");	
+	p.src = url;	
+	p.play();	
+	var s = document.getElementById("curSong");	
+	if(s) s.innerHTML = url;				
+}	
+</script>							
+</body>	
+</html>	
