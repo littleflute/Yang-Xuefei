@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<body>
+<script id="script1">
+function btnTextarea(div,id,html,value,iClick)
+{ 
+	var b = document.getElementById(id);
+    if(!b) {
+    	b = document.createElement("button");
+        b.id = id;
+    }  
+    b.n = 0;
+    b.html	= html;
+    b.iClick = iClick;
+    
+    b.renew = function()
+    { 
+        b.innerHTML = b.html+":"+b.n; 
+    }
+    b.renew();
+    div.appendChild(b);
+    var e = document.createElement("div");
+    div.appendChild(e);
+    if(value)
+    {
+    	var d = document.createElement("textarea");
+        d.id = "v"+id;
+        d.innerHTML = value;
+        d.style.border = "1px blue solid";
+        d.style.display = "none";
+        b.style.color = "gray";
+        div.appendChild(d);
+       
+        b.div = d;
+    }
+    
+    var b2 = btnStatic(div,"xdid=2","htmlxd","value:abc");
+    
+    b.onclick = function()
+    { 
+        if(b.div.style.display == "none")
+        {
+	    	b.n++;
+        	b.div.style.display = "block";
+            b.style.color = "blue";
+        }
+        else if(b.div.style.display == "block")
+        {
+        	b.div.style.display = "none";
+            b.style.color = "gray";
+        }
+        b.renew();
+        if(b.iClick) b.iClick();
+    }
+    return b;
+}
+function btnStatic(div,id,html,value,iClick)
+{ 
+	var b = document.getElementById(id);
+    if(!b) {
+    	b = document.createElement("button");
+        b.id = id;
+    }  
+    b.n = 0;
+    b.html	= html;
+    b.iClick = iClick;
+    
+    b.renew = function()
+    { 
+    	b.innerHTML = b.html+":"+b.n; 
+    }
+    b.renew();
+    div.appendChild(b);
+    var e = document.createElement("div");
+    div.appendChild(e);
+    
+    if(value)
+    {
+    	var d = document.createElement("div");
+        d.id = "v"+id;
+        d.innerHTML = value;
+        d.style.border = "1px blue solid";
+        d.style.display = "none";
+        b.style.color = "red";
+        div.appendChild(d);
+       
+        b.div = d;
+    }
+    b.onclick = function()
+    { 
+        if(b.iClick) b.iClick();
+        if(b.div.style.display == "none")
+        {
+	    	b.n++;
+        	b.div.style.display = "block";
+            b.style.color = "green";
+        }
+        else if(b.div.style.display == "block")
+        {
+        	b.div.style.display = "none";
+            b.style.color = "red";
+        }
+        b.renew();
+    }
+    return b;
+}
+function player(){
+	this.v 		= "V0.0.3"; 
+    var b = document.getElementById("playerBtn");
+    if(!b){
+    	b = document.createElement("button");
+        document.body.appendChild(b);
+    }
+    b.innerHTML = "+";
+    b.myParent	= this;
+    b.onclick	= function(){
+    	this.myParent.showPrp(this);    	
+    }
+    
+    var text	= document.getElementById("playerText");
+    if(!text){
+    	text = document.createElement("textarea");
+        
+        document.body.appendChild(text);
+    }
+    text.style.border = "1px red solid";
+     
+    
+    var view	= document.getElementById("playerView");
+    if(!view){
+    	view = document.createElement("div");
+        
+        document.body.appendChild(view);
+    }
+    view.style.border = "1px blue solid";
+     
+    
+    this.view		= view;
+    this.btn 		= b;
+    this.songList	= "empty"; 
+    
+    this.showPrp	= function(btn){ 
+    	if(btn.innerHTML=="+") 
+        {
+        	btn.innerHTML = '-';
+            var n = 0;
+            for(i in this)
+        	{
+            	n++; 
+                if(i!="toolBar")
+                {
+            		var b =  btnStatic(this.view,"b"+n,i,this[i]); 
+                }
+                else
+                { 
+                	var bt = btnTextarea(this.view,"bb"+n,i,this[i],
+                    				null);
+                    bt.f1 = function(){alert(bt.renew);};          
+            		var b =  btnStatic(this.view,
+                    				"b"+n,"cmd1",null,bt.f1); 
+                }
+        	} 
+        }
+    	else if(btn.innerHTML=="-")
+        {
+        	btn.innerHTML = '+';
+            this.view.innerHTML = "";
+        } 
+    }
+    this.toolBar	= function(btn){ 
+    }   
+} 
+var myPlayer = new player();
+</script>
+</body>
+</html> 
